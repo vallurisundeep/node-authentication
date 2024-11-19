@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Authentication App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        main {
+            padding: 1rem 2rem;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            margin-top: 2rem;
+            padding-bottom: 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        code {
+            background: #f4f4f9;
+            padding: 2px 4px;
+            font-size: 0.9rem;
+            color: #c7254e;
+        }
+        pre {
+            background: #f4f4f9;
+            padding: 1rem;
+            overflow: auto;
+            border-left: 5px solid #333;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Node Authentication App</h1>
+    </header>
+    <main>
+        <h2>Features</h2>
+        <ul>
+            <li>User Registration: Admins can register new users.</li>
+            <li>User Login: Generates an access token and refresh token upon successful login.</li>
+            <li>JWT Authentication: Secures endpoints with JSON Web Tokens (JWT).</li>
+            <li>Role-Based Access Control: Restricts access to specific routes based on user roles.</li>
+            <li>Token Refreshing: Allows users to refresh expired access tokens using a refresh token.</li>
+            <li>Swagger API Documentation: Provides interactive API documentation.</li>
+        </ul>
+
+        <h2>Technologies Used</h2>
+        <ul>
+            <li>Node.js: JavaScript runtime.</li>
+            <li>Express.js: Web framework for handling routing and middleware.</li>
+            <li>Sequelize: ORM for interacting with MySQL.</li>
+            <li>JWT: JSON Web Token for secure authentication.</li>
+            <li>bcrypt: For password hashing.</li>
+            <li>dotenv: For environment variable management.</li>
+            <li>swagger-ui-express and swagger-jsdoc: For API documentation.</li>
+        </ul>
+
+        <h2>How to Use This App</h2>
+        <ol>
+            <li>Clone the repository:
+                <pre>git clone https://github.com/vallurisundeep/node-authentication.git</pre>
+            </li>
+            <li>Navigate into the project directory:
+                <pre>cd node-authentication</pre>
+            </li>
+            <li>Install dependencies:
+                <pre>npm install</pre>
+            </li>
+            <li>Set up environment variables in a <code>.env</code> file:
+                <pre>
+PORT=3000
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=node_auth_db
+DB_USER=root
+DB_PASSWORD=yourpassword
+JWT_SECRET=your_jwt_secret
+JWT_REFRESH_SECRET=your_refresh_jwt_secret
+                </pre>
+            </li>
+            <li>Run database migrations:
+                <pre>npx sequelize-cli db:migrate</pre>
+            </li>
+            <li>Start the server:
+                <pre>npm run dev</pre>
+            </li>
+            <li>Access the API documentation at:
+                <pre>http://localhost:3000/api-docs</pre>
+            </li>
+        </ol>
+
+        <h2>API Endpoints</h2>
+        <h3>Authentication</h3>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+                <th>Protected</th>
+            </tr>
+            <tr>
+                <td><b>POST</b></td>
+                <td>/api/v1/login</td>
+                <td><b>User login</b></td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><b>POST</b></td>
+                <td>/api/v1/refresh</td>
+                <td><b>Refresh access token</b></td>
+                <td>No</td>
+            </tr>
+        </table>
+
+        <h3>User Management</h3>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+                <th>Protected</th>
+            </tr>
+            <tr>
+                <td><b>POST</b></td>
+                <td>/api/v1/register</td>
+                <td><b>Register a new user</b></td>
+                <td><b>Admin</b></td>
+            </tr>
+            <tr>
+                <td><b>GET</b></td>
+                <td>/api/v1/profile</td>
+                <td><b>Get logged-in user profile</b></td>
+                <td><b>Yes</b></td>
+            </tr>
+        </table>
+
+        <h2>Role-Based Access Control</h2>
+        <p>Admins can register new users and access admin routes. Users can access their profile and other user-specific routes.</p>
+
+        <h2>Project Structure</h2>
+        <pre>
+node-authentication/
+├── src/
+│   ├── config/             # Configuration files (e.g., database, Swagger)
+│   ├── controllers/        # Business logic and request handling
+│   ├── middleware/         # Custom middleware (e.g., authentication, role checking)
+│   ├── models/             # Sequelize models
+│   ├── routes/             # API routes
+│   ├── utils/              # Utility functions (e.g., logger)
+│   ├── app.js              # Express app setup
+│   └── server.js           # Server entry point
+├── .env                    # Environment variables
+├── .gitignore              # Git ignore file
+├── README.md               # Project documentation
+├── package.json            # Node dependencies and scripts
+        </pre>
+
+        <h2>License</h2>
+        <p>This project is licensed under the MIT License. See the LICENSE file for details.</p>
+    </main>
+    <footer>
+        <p>© 2024 Sundeep Valluri</p>
+    </footer>
+</body>
+</html>
