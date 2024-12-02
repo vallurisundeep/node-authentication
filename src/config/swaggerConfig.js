@@ -9,7 +9,7 @@ const swaggerOptions = {
       description: 'Documentation for your API endpoints',
       contact: {
         name: 'Sundeep',
-        email: 'your-email@example.com',
+        email: 'vallurisundeep@gmail.com',
       },
     },
     servers: [
