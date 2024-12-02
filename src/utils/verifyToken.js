@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 // Replace with your actual token
-const refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzMxOTg4NTI2LCJleHAiOjE3MzI1OTMzMjZ9.UXx8O1QEj9fYFuU2rBHZneNV3HcTvDflcDLVO4HLnV0";
-const JWT_REFRESH_SECRET = "d66f9d19f7cea7ce822fb23f8c7c740953fe4e3ba11ae211668d1a7c09b97ea2c52e850cae976ff1271011bc761c7ff2d8f0c7aeedbfd5bde52691c958c8119f"; // Replace with your secret
+const refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ2YWxsdXJpc3VuZGVlcEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzMwODEyNzUsImV4cCI6MTczMzA4NDg3NX0.KRnbLxa_ry_E2EAKbYcG09BATKREgVzYsSOKXHIgWTk";
+const JWT_REFRESH_SECRET = "b1485b0dd6d3d417ddffc914f53de391da8430171669fe950c5901e0ec8a6adb0721afbc69d897cae0bff36f20e39d867dedde42bee24810a5f8ff50719033f0"; // Replace with your secret
 
 try {
-    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
     console.log("Decoded Refresh Token:", decoded);}
      catch (err) {
     console.error('Token verification error:', err.message);
